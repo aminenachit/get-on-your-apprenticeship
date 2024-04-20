@@ -1,16 +1,35 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Couleurs de base ajustées pour une meilleure harmonie */
+  --gryffindor-red: #7F0909; /* Plus sombre pour un meilleur contraste avec le doré */
+  --gryffindor-gold: #D3A625; /* Plus clair pour ressortir sur le rouge */
+  --slytherin-green: #2A623D; /* Plus clair pour une meilleure lisibilité */
+  --slytherin-silver: #727272; /* Plus clair pour contraster avec le vert */
+  --ravenclaw-blue: #222F5B; /* Plus clair pour harmoniser avec le bronze */
+  --ravenclaw-bronze: #AD8A56; /* Plus doux pour compléter le bleu */
+  --hufflepuff-black: #313131; /* Plus clair pour moins d'absorption de lumière */
+  --hufflepuff-yellow: #FFD700; /* Jaune or standard pour une touche classique */
+
+  /* Utilisez ces couleurs dans le reste de votre CSS */
+  font-family: 'Times New Roman', serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: var(--gryffindor-gold);
+  background-color: var(--gryffindor-red);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--gryffindor-gold);
+  background-color: var(--gryffindor-red);
+}
+
+.App-logo {
+  width: 400px;
+  height: 400px;
+}
+body {
+  cursor: url('./assets/harrypottercursor.cur'), auto;
 }
 
 a {
@@ -18,6 +37,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -28,6 +48,18 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: var(--hufflepuff-black) url('./assets/stars.png') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: black; /* Couleur de fond noire */
+  background-image: url('./assets/stars.png'); /* Image de fond */
+  background-repeat: no-repeat; /* Empêcher la répétition de l'image */
+  background-position: center center; /* Positionner l'image au centre */
+  background-attachment: fixed; /* Fixer l'image pour qu'elle reste en arrière-plan */
 }
 
 h1 {
@@ -46,9 +78,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -59,10 +93,112 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
 }
+
+.student-list {
+  background: linear-gradient(to right, var(--ravenclaw-blue), var(--ravenclaw-bronze));
+}
+
+.student-card {
+  background-image: url('./assets/card.jpg');
+  border: 2px solid #333333; /* Bordure sombre pour contraste */
+  color: #000000; /* Couleur du texte */
+}
+
+.student-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Ombre au survol pour effet de profondeur */
+  transform: translateY(-4px); /* Légère translation vers le haut au survol */
+}
+
+.student-photo {
+  width: 100px;
+  height: 100px;
+  /*border-radius: 50%;*/
+  margin-bottom: 10px;
+  margin-top: 10px;
+  object-fit: contain ;
+  transition: transform 0.3s ease;
+  background-size: cover;
+  background-position: center;
+}
+
+.student-photo:hover {
+  transform: scale(1.1);
+}
+
+.house-logo {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+  background-size: cover;
+  background-position: center;
+  position: absolute; /* Positionnement absolu par rapport à son conteneur relatif */
+  top: 0; /* En haut du conteneur */
+  right: 0; /* À droite du conteneur */
+}
+
+.house-logo:hover {
+  transform: scale(1.1);
+}
+
+.student-card h3 {
+  margin: 0;
+  color: #333333;
+  font-family: 'Henny Penny', cursive;
+}
+
+.student-card p {
+  color: #777777;
+  font-family: 'Open Sans', sans-serif;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Styles spécifiques pour chaque maison */
+/*.student-card[data-house='Gryffindor'] {
+  background: var(--gryffindor-red);
+  border-color: var(--gryffindor-gold);
+}
+
+.student-card[data-house='Slytherin'] {
+  background: var(--slytherin-green);
+  border-color: var(--slytherin-silver);
+}
+
+.student-card[data-house='Ravenclaw'] {
+  background: var(--ravenclaw-blue);
+  border-color: var(--ravenclaw-bronze);
+}
+
+.student-card[data-house='Hufflepuff'] {
+  background: var(--hufflepuff-black);
+  border-color: var(--hufflepuff-yellow);
+}*/
+/* Ajoutez un peu de magie avec des baguettes qui apparaissent au survol */
+.student-photo:hover::after {
+  content: url('./assets/stars.png');
+  position: absolute;
+  right: -20px;
+  bottom: 10px;
+}
+
