@@ -9,11 +9,11 @@ import slytherinLogo from './assets/slytherin.png';
 import hufflepuffLogo from './assets/hufflepuff.png';
 
 
-import harrypotter from './assets/harrypotter.png';
+/*import harrypotter from './assets/harrypotter.png';
 import hermionegranger from './assets/hermionegranger.png';
 import lunalovegood from './assets/lunalovegood.png';
 import nevillelongbottom from './assets/nevillelongbottom.png';
-import ronweasley from './assets/ronweasley.png';
+import ronweasley from './assets/ronweasley.png';*/
 import nop from './assets/nop.png';
 
 // Crée un objet pour associer les noms des élèves à leurs photos
@@ -34,7 +34,7 @@ function App() {
       const data = await response.json();
       setStudents(data.map(student => ({
         ...student,
-        photoUrl: getStudentLogo(student.name),
+      
         houseLogo: getHouseLogo(student.house),
       })));
       animateCards();
@@ -59,7 +59,7 @@ function App() {
     }
   };
 
-  const getStudentLogo = (name) => {
+  /*const getStudentLogo = (name) => {
     switch (name) {
         case 'Harry Potter':
         return harrypotter;
@@ -74,7 +74,7 @@ function App() {
       default:
         return nop; 
     }
-  };
+  };*/
 
   const animateCards = () => {
     const cards = document.querySelectorAll('.student-card');
@@ -86,16 +86,15 @@ function App() {
     });
   };
 
-  // Ajoutez un état pour stocker l'élève tiré au sort
+  // Ajout d'un état pour stocker les students tiré au sort
   const [randomStudent, setRandomStudent] = useState(null);
 
-  // Fonction pour tirer au sort un élève
   const fetchRandomStudent = async () => {
     const response = await fetch('http://localhost:3000/real/randomstudent');
     const data = await response.json();
     setRandomStudent({
       ...data,
-      photoUrl: getStudentLogo(data.name),
+     
       houseLogo: getHouseLogo(data.house),
     });
   };
@@ -107,18 +106,21 @@ function App() {
         <div><button onClick={fetchRandomStudent}> Tirer un élève au sort</button>
         {randomStudent && (
           <div className="student-card">
-            <img src={randomStudent.photoUrl} alt={`Photo de ${randomStudent.name}`} className="student-photo" />
+            {/*<img src={student.photoUrl} alt={`Photo de ${student.name}`} className="student-photo" /> */}
+            <img src={randomStudent.image ? randomStudent.image : nop} alt={`Photo de ${randomStudent.name}`} className="student-photo" />
             <img src={randomStudent.houseLogo} alt={`Logo de la maison ${randomStudent.house}`} className="house-logo" />
             <h3>Nom : {randomStudent.name}</h3>
             <h4>Naissance : {randomStudent.dateOfBirth}</h4>
             <h4>Surnom : {randomStudent.alternate_names}</h4>
           </div>
         )}</div>
+
         <h2>Voici la liste de tous les élèves :</h2>
         <div className="student-list">
           {students ? students.map(student => (
             <div key={crypto.randomUUID()} className="student-card">
-              <img src={student.photoUrl} alt={`Photo de ${student.name}`} className="student-photo" />
+              {/*<img src={student.photoUrl} alt={`Photo de ${student.name}`} className="student-photo" /> */}
+              <img src={student.image ? student.image : nop} alt={`Photo de ${student.name}`} className="student-photo" />
               <img src={student.houseLogo} alt={`Logo de la maison ${student.house}`} className="house-logo" />
               <h3>Name : {student.name}</h3>
               <h4>Birth : {student.dateOfBirth}</h4>

@@ -75,7 +75,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-image: url('./assets/card.jpg');
-  cursor: pointer;
+  cursor: url('./assets/harrypottercursor.cur'), auto;
   transition: border-color 0.25s;
 }
 
