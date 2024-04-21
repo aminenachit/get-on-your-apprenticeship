@@ -9,6 +9,9 @@ import usersRouter from './routes/users';
 import dummyRouter from './routes/dummy';
 import errorHandler from './error-handler';
 
+import realRouter from './routes/real';
+
+
 const app = express();
 app.use(cors());
 
@@ -20,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
 app.use('/dummy', dummyRouter);
+app.use('/real', realRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
