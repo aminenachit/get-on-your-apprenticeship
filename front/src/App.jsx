@@ -10,21 +10,25 @@ import nop from './assets/nop.png';
 
 function App() {
   const [students, setStudents] = useState(null);
+  const [selectedHouse, setSelectedHouse] = useState('all');
 
   useEffect(() => {
-    const fetchStudents = async () => {
-      const response = await fetch('http://localhost:3000/real/students');
-      const data = await response.json();
-      setStudents(data.map(student => ({
-        ...student,
-      
-        houseLogo: getHouseLogo(student.house),
-      })));
-      animateCards();
-    };
-  
-    fetchStudents();
-  }, []);
+    fetchStudents(selectedHouse);
+  }, [selectedHouse]);
+
+  const fetchStudents = async (house) => {
+    let url = 'http://localhost:3000/real/students';
+    if (house !== 'all') {
+      url += `?house=${house}`;
+    }
+    const response = await fetch(url);
+    const data = await response.json();
+    setStudents(data.map(student => ({
+      ...student,
+      houseLogo: getHouseLogo(student.house),
+    })));
+    animateCards();
+  };
 
   // Fonction pour obtenir le logo de la maison du student
   const getHouseLogo = (house) => {
@@ -81,8 +85,14 @@ function App() {
             <h4>Surnom : {randomStudent.alternate_names}</h4>
           </div>
         )}</div>
-
         <h2>Voici la liste de tous les élèves :</h2>
+        <div>
+          <button onClick={() => setSelectedHouse('all')}>Tous</button>
+          <button onClick={() => setSelectedHouse('Gryffindor')}>Gryffindor</button>
+          <button onClick={() => setSelectedHouse('Ravenclaw')}>Ravenclaw</button>
+          <button onClick={() => setSelectedHouse('Slytherin')}>Slytherin</button>
+          <button onClick={() => setSelectedHouse('Hufflepuff')}>Hufflepuff</button>
+        </div>
         <div className="student-list">
           {students ? students.map(student => (
             <div key={crypto.randomUUID()} className="student-card">
