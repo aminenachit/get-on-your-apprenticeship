@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const realRouter = express.Router();
 
-// Route existante pour récupérer tous les élèves
+// Route pour récupérer tous les élèves
 realRouter.get('/students', async (req: Request, res: Response) => {
   try {
     const url = 'https://harry-potter-api-3a23c827ee69.herokuapp.com/api/characters';
@@ -14,7 +14,7 @@ realRouter.get('/students', async (req: Request, res: Response) => {
   }
 });
 
-// Nouvelle route pour récupérer un élève au hasard
+// route pour récupérer un élève au hasard
 realRouter.get('/randomstudent', async (req: Request, res: Response) => {
   try {
     const url = 'https://harry-potter-api-3a23c827ee69.herokuapp.com/api/characters';
@@ -27,5 +27,7 @@ realRouter.get('/randomstudent', async (req: Request, res: Response) => {
     res.status(500).send('Erreur lors du tirage au sort de l\'élève');
   }
 });
+
+
 
 export default realRouter;

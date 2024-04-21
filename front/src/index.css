@@ -1,15 +1,13 @@
 :root {
-  /* Couleurs de base ajustées pour une meilleure harmonie */
-  --gryffindor-red: #7F0909; /* Plus sombre pour un meilleur contraste avec le doré */
-  --gryffindor-gold: #D3A625; /* Plus clair pour ressortir sur le rouge */
-  --slytherin-green: #2A623D; /* Plus clair pour une meilleure lisibilité */
-  --slytherin-silver: #727272; /* Plus clair pour contraster avec le vert */
-  --ravenclaw-blue: #222F5B; /* Plus clair pour harmoniser avec le bronze */
-  --ravenclaw-bronze: #AD8A56; /* Plus doux pour compléter le bleu */
-  --hufflepuff-black: #313131; /* Plus clair pour moins d'absorption de lumière */
-  --hufflepuff-yellow: #FFD700; /* Jaune or standard pour une touche classique */
+  --gryffindor-red: #7F0909; 
+  --gryffindor-gold: #D3A625; 
+  --slytherin-green: #2A623D; 
+  --slytherin-silver: #727272; 
+  --ravenclaw-blue: #222F5B; 
+  --ravenclaw-bronze: #AD8A56; 
+  --hufflepuff-black: #313131; 
+  --hufflepuff-yellow: #FFD700; 
 
-  /* Utilisez ces couleurs dans le reste de votre CSS */
   font-family: 'Times New Roman', serif;
   line-height: 1.5;
   font-weight: 400;
@@ -28,10 +26,6 @@
   width: 400px;
   height: 400px;
 }
-body {
-  cursor: url('./assets/harrypottercursor.cur'), auto;
-}
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -43,23 +37,20 @@ a:hover {
 }
 
 body {
+  cursor: url('./assets/harrypottercursor.cur'), auto;
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background: var(--hufflepuff-black) url('./assets/stars.png') no-repeat center center fixed;
   background-size: cover;
-  margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: black; /* Couleur de fond noire */
-  background-image: url('./assets/stars.png'); /* Image de fond */
-  background-repeat: no-repeat; /* Empêcher la répétition de l'image */
-  background-position: center center; /* Positionner l'image au centre */
-  background-attachment: fixed; /* Fixer l'image pour qu'elle reste en arrière-plan */
+  background-color: black; 
+  background-image: url('./assets/test2.gif'); 
+  background-repeat: no-repeat; 
+  background-position: center center; 
+  background-attachment: fixed; 
 }
 
 h1 {
@@ -77,10 +68,14 @@ button {
   background-image: url('./assets/card.jpg');
   cursor: url('./assets/harrypottercursor.cur'), auto;
   transition: border-color 0.25s;
+  margin-bottom: 10px;
+  color: #000000; 
 }
 
 button:hover {
   border-color: #646cff;
+  transition: transform 0.3s ease;
+  transform: scale(1.1);
 }
 
 button:focus,
@@ -94,30 +89,53 @@ button:focus-visible {
     background-color: #ffffff;
   }
 
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 .student-list {
-  background: linear-gradient(to right, var(--ravenclaw-blue), var(--ravenclaw-bronze));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .student-card {
+  width: calc(50% - 10px);
+  margin-bottom: 20px;
+  position: relative;
   background-image: url('./assets/card.jpg');
-  border: 2px solid #333333; /* Bordure sombre pour contraste */
-  color: #000000; /* Couleur du texte */
+  border: 2px solid #333333; 
+  color: #000000; 
 }
 
 .student-card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Ombre au survol pour effet de profondeur */
-  transform: translateY(-4px); /* Légère translation vers le haut au survol */
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); 
+  transform: translateY(-4px); 
 }
 
+.random-student-card {
+  width: calc(50% - 10px);
+  margin: 0 auto 20px auto;
+  position: relative;
+  background-image: url('./assets/card.jpg');
+  border: 2px solid #333333;
+  color: #000000;
+}
+.random-student-card.winner {
+  animation: winnerAnimation 1s ease forwards;
+  border: 3px solid gold;
+  box-shadow: 0 0 15px gold;
+}
+
+@keyframes winnerAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .student-photo {
   width: 100px;
   height: 100px;
@@ -135,15 +153,15 @@ button:focus-visible {
 }
 
 .house-logo {
+  position: absolute;
   width: 80px;
   height: 80px;
   margin-bottom: 10px;
   transition: transform 0.3s ease;
   background-size: cover;
   background-position: center;
-  position: absolute; /* Positionnement absolu par rapport à son conteneur relatif */
-  top: 0; /* En haut du conteneur */
-  right: 0; /* À droite du conteneur */
+  top: 0; 
+  right: 0;
 }
 
 .house-logo:hover {
@@ -174,27 +192,6 @@ button:focus-visible {
   }
 }
 
-/* Styles spécifiques pour chaque maison */
-/*.student-card[data-house='Gryffindor'] {
-  background: var(--gryffindor-red);
-  border-color: var(--gryffindor-gold);
-}
-
-.student-card[data-house='Slytherin'] {
-  background: var(--slytherin-green);
-  border-color: var(--slytherin-silver);
-}
-
-.student-card[data-house='Ravenclaw'] {
-  background: var(--ravenclaw-blue);
-  border-color: var(--ravenclaw-bronze);
-}
-
-.student-card[data-house='Hufflepuff'] {
-  background: var(--hufflepuff-black);
-  border-color: var(--hufflepuff-yellow);
-}*/
-/* Ajoutez un peu de magie avec des baguettes qui apparaissent au survol */
 .student-photo:hover::after {
   content: url('./assets/stars.png');
   position: absolute;

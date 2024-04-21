@@ -2,28 +2,11 @@ import { useState, useEffect } from 'react';
 import logo from './assets/hogwarts.png';
 import './App.css';
 
-// Importe les images des maisons ici
 import gryffindorLogo from './assets/gryffindor.png';
 import ravenclawLogo from './assets/ravenclaw.png';
 import slytherinLogo from './assets/slytherin.png';
 import hufflepuffLogo from './assets/hufflepuff.png';
-
-
-/*import harrypotter from './assets/harrypotter.png';
-import hermionegranger from './assets/hermionegranger.png';
-import lunalovegood from './assets/lunalovegood.png';
-import nevillelongbottom from './assets/nevillelongbottom.png';
-import ronweasley from './assets/ronweasley.png';*/
 import nop from './assets/nop.png';
-
-// Crée un objet pour associer les noms des élèves à leurs photos
-/*const studentPhotos = {
-  'Harry Potter': './assets/harrypotter.png',
-  'Hermione Granger': './assets/hermionegranger.png',
-  'Luna Lovegood': './assets/lunalovegood.png',
-  'Neville Longbottom': './assets/nevillelongbottom.png',
-  'Ron Weasley': './assets/ronweasley.png'
-};*/
 
 function App() {
   const [students, setStudents] = useState(null);
@@ -59,22 +42,6 @@ function App() {
     }
   };
 
-  /*const getStudentLogo = (name) => {
-    switch (name) {
-        case 'Harry Potter':
-        return harrypotter;
-        case 'Hermione Granger':
-        return hermionegranger;
-        case 'Luna Lovegood':
-        return lunalovegood;
-        case 'Neville Longbottom':
-        return nevillelongbottom;
-        case 'Ron Weasley':
-        return ronweasley;
-      default:
-        return nop; 
-    }
-  };*/
 
   const animateCards = () => {
     const cards = document.querySelectorAll('.student-card');
@@ -105,7 +72,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo"  />
         <div><button onClick={fetchRandomStudent}> Tirer un élève au sort</button>
         {randomStudent && (
-          <div className="student-card">
+          <div className={`random-student-card ${randomStudent && 'winner'}`}>
             {/*<img src={student.photoUrl} alt={`Photo de ${student.name}`} className="student-photo" /> */}
             <img src={randomStudent.image ? randomStudent.image : nop} alt={`Photo de ${randomStudent.name}`} className="student-photo" />
             <img src={randomStudent.houseLogo} alt={`Logo de la maison ${randomStudent.house}`} className="house-logo" />
