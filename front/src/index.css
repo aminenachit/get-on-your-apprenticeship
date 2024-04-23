@@ -74,6 +74,18 @@ button {
   color: #000000; 
 }
 
+.center button {
+  width: calc(30% - 10px);
+  margin: 5px;
+  padding: 10px;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
 button:hover {
   border-color: #646cff;
   transition: transform 0.3s ease;
@@ -115,7 +127,7 @@ button:focus-visible {
 }
 
 .random-student-card {
-  width: calc(50% - 10px);
+  width: calc(40% - 10px);
   margin: 0 auto 20px auto;
   position: relative;
   background-image: url('./assets/card.jpg');

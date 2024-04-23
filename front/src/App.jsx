@@ -11,24 +11,38 @@ import nop from './assets/nop.png';
 function App() {
   const [students, setStudents] = useState(null);
   const [selectedHouse, setSelectedHouse] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    fetchStudents(selectedHouse);
-  }, [selectedHouse]);
+    fetchStudents(selectedHouse, currentPage);
+  }, [selectedHouse, currentPage]);
 
-  const fetchStudents = async (house) => {
-    let url = 'http://localhost:3000/real/students';
+  const fetchStudents = async (house, page) => {
+    let url = `http://localhost:3000/real/students?page=${page}`;
     if (house !== 'all') {
-      url += `?house=${house}`;
+      url += `&house=${house}`;
     }
     const response = await fetch(url);
     const data = await response.json();
-    setStudents(data.map(student => ({
+    setStudents(data.students.map(student => ({
       ...student,
       houseLogo: getHouseLogo(student.house),
     })));
+    setTotalPages(data.totalPages);
     animateCards();
   };
+
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage > 1 ? currentPage - 1 : 1);
+    window.scrollTo(0, 500);
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage < totalPages ? currentPage + 1 : totalPages);
+    window.scrollTo(0, 500);
+  };
+
 
   // Fonction pour obtenir le logo de la maison du student
   const getHouseLogo = (house) => {
@@ -86,7 +100,7 @@ function App() {
           </div>
         )}</div>
         <h2>Voici la liste de tous les élèves :</h2>
-        <div>
+        <div className='center'>
           <button onClick={() => setSelectedHouse('all')}>Tous</button>
           <button onClick={() => setSelectedHouse('Gryffindor')}>Gryffindor</button>
           <button onClick={() => setSelectedHouse('Ravenclaw')}>Ravenclaw</button>
@@ -104,6 +118,10 @@ function App() {
               <h4>surname : {student.alternate_names}</h4>
             </div>
           )) : "Chargement..."}
+          <div className='center'>
+            <button onClick={handlePrevPage}>Previous</button>
+            <button onClick={handleNextPage}>Next</button>
+          </div>
         </div>
       </header>
     </div>
