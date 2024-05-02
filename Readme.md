@@ -176,12 +176,18 @@ La on commence à rentrer dans les sujets DevOps !!! Viens te frotter à la cont
 Le gain ? En dockerisant ton application, tu seras capable de la distribuer très facilement à n'importe qui ayant une commande Docker installée sur son ordi
 
 > Si tu veux en savoir plus sur Docker: https://www.docker.com/get-started
->Dans l'api : 
->docker build -t img_api .
->docker run -p 3000:3000 img_api
->Dans le front :
->docker build -t img_front .
->docker run -p 5173:8080 img_front
+
+> Dans l'api : 
+
+> docker build -t img_api .
+
+> docker run -p 3000:3000 img_api
+
+> Dans le front :
+
+> docker build -t img_front .
+
+> docker run -p 5173:8080 img_front
 
 #### :fire::fire: [DEVOPS/CLOUD] Déploie le front sur Github pages
 Un front dispo pour toi sur ton ordi, c'est bien. Mais le rendre disponible à tous les apprentis sorciers qui voudraient savoir qui sera à Poudlard cette année, c'est mieux !
