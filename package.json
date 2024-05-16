@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc"
+  },
   "devDependencies": {
     "gh-pages": "^6.1.1"
   }
