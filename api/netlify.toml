@@ -1,8 +1,14 @@
 [build]
-  command = "npm install && npm run build"
+  command = "npm ci && npm run build"
   publish = "dist"
 
 [dev]
   command = "npm run dev"
   port = 3000
   targetPort = 3000
+
+[build.environment]
+  NODE_ENV = "production"
+
+[cache]
+  paths = ["node_modules"]
