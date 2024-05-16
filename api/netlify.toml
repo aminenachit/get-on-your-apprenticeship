@@ -8,8 +8,8 @@
   targetPort = 3000
 
 [context.production.environment]
-  NODE_VERSION = "16.14.0"
-  
+  NODE_VERSION = "16.20.0"
+
 [build.environment]
   NODE_ENV = "production"
 
