@@ -34,7 +34,17 @@ jobs:
         run: |
           cd ${{ matrix.folder }}
           ls -la
-          
+
+      - name: Verify ESLint installation
+        run: |
+          cd ${{ matrix.folder }}
+          npx eslint -v
+
+      - name: Verify ESLint config
+        run: |
+          cd ${{ matrix.folder }}
+          npx eslint --print-config src/index.ts
+
       - name: Run linter
         run: |
           cd ${{ matrix.folder }}
