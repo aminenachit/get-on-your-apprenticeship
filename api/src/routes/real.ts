@@ -8,7 +8,8 @@ realRouter.get('/students', async (req: Request, res: Response) => {
   try {
     const { house, page = 1 } = req.query;
     const pageSize = 6;
-    const url = 'https://harry-potter-api-3a23c827ee69.herokuapp.com/api/characters';
+    const url =
+      'https://harry-potter-api-3a23c827ee69.herokuapp.com/api/characters';
     const response = await axios.get(url);
     let students = response.data;
 
@@ -29,22 +30,19 @@ realRouter.get('/students', async (req: Request, res: Response) => {
   }
 });
 
-
-
 // route pour récupérer un élève au hasard
 realRouter.get('/randomstudent', async (req: Request, res: Response) => {
   try {
-    const url = 'https://harry-potter-api-3a23c827ee69.herokuapp.com/api/characters';
+    const url =
+      'https://harry-potter-api-3a23c827ee69.herokuapp.com/api/characters';
     const response = await axios.get(url);
     const students = response.data;
     const randomIndex = Math.floor(Math.random() * students.length);
     const randomStudent = students[randomIndex];
     res.json(randomStudent);
   } catch (error) {
-    res.status(500).send('Erreur lors du tirage au sort de l\'élève');
+    res.status(500).send("Erreur lors du tirage au sort de l'élève");
   }
 });
-
-
 
 export default realRouter;

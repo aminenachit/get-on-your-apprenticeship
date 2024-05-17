@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
-    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
-    "lint:fix": "eslint --fix 'src/**/*.{ts,tsx,js,jsx}'",
+    "lint": "eslint \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint:fix": "eslint --fix \"src/**/*.ts\"",
     "start": "node ./dist/index.js",
     "dev": "tsx watch src/index.ts",
     "build": "tsc"

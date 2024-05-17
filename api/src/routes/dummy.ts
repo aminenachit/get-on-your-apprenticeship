@@ -1,15 +1,15 @@
 import express from 'express';
 const dummyRouter = express.Router();
 
-dummyRouter.get('/', function (req, res, next) {
+dummyRouter.get('/', function (req, res) {
   res.send('This is dummy route');
 });
 
-dummyRouter.get('/student', function (req, res, next) {
+dummyRouter.get('/student', function (req, res) {
   res.send('Harry Potter !');
 });
 
-dummyRouter.get('/students', function (req, res, next) {
+dummyRouter.get('/students', function (req, res) {
   res.json([
     {
       name: 'Harry Potter',
