@@ -1,9 +1,5 @@
 {
   "extends": "@tsconfig/node20/tsconfig.json",
-  "include": [
-    "./src/**/*",
-    "./netlify/functions/real.ts" // Ajoutez le chemin complet du fichier
-  ],
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
