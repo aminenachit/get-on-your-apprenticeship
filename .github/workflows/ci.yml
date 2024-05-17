@@ -23,13 +23,18 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18'  # Utiliser une version plus récente de Node.js
+          node-version: '18'
 
       - name: Install dependencies
         run: |
           cd ${{ matrix.folder }}
           npm install
 
+      - name: List files for debugging
+        run: |
+          cd ${{ matrix.folder }}
+          ls -la
+          
       - name: Run linter
         run: |
           cd ${{ matrix.folder }}
