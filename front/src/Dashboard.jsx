@@ -1,4 +1,3 @@
-import React from 'react';
 import PieChart from './components/PieChart';
 import AgeChart from './components/AgeChart';
 import './App.css';
