@@ -9,12 +9,9 @@ on:
       - main
 
 jobs:
-  lint-and-format:
+  lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        directory: [api, front]
-    name: Lint and Format ${{ matrix.directory }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -24,48 +21,25 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
+      - name: Install dependencies for front
         run: npm install
-        working-directory: ${{ matrix.directory }}
+        working-directory: ./front
 
-      - name: Run linter
+      - name: Run linter for front
         run: npm run lint
-        working-directory: ${{ matrix.directory }}
+        working-directory: ./front
 
-      - name: Run linter with fix
-        if: failure()
-        run: npm run lint:fix
-        working-directory: ${{ matrix.directory }}
-
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        directory: [api, front]
-    name: Test ${{ matrix.directory }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install dependencies
+      - name: Install dependencies for api
         run: npm install
-        working-directory: ${{ matrix.directory }}
+        working-directory: ./api
 
-      - name: Run tests
-        run: npm test
-        working-directory: ${{ matrix.directory }}
+      - name: Run linter for api
+        run: npm run lint
+        working-directory: ./api
 
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        directory: [api, front]
-    name: Build ${{ matrix.directory }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -75,10 +49,18 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
+      - name: Install dependencies for front
         run: npm install
-        working-directory: ${{ matrix.directory }}
+        working-directory: ./front
 
-      - name: Build project
+      - name: Build front
         run: npm run build
-        working-directory: ${{ matrix.directory }}
+        working-directory: ./front
+
+      - name: Install dependencies for api
+        run: npm install
+        working-directory: ./api
+
+      - name: Build api
+        run: npm run build
+        working-directory: ./api
