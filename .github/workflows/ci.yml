@@ -1,42 +1,84 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  lint-and-format-front:
+  lint-and-format:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: front
+    strategy:
+      matrix:
+        directory: [api, front]
+    name: Lint and Format ${{ matrix.directory }}
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Install dependencies
-        run: npm install
-      - name: Run linter
-        run: npm run lint
-      - name: Run formatter
-        run: npm run format
 
-  lint-and-format-api:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: api
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
+
       - name: Install dependencies
         run: npm install
+        working-directory: ${{ matrix.directory }}
+
       - name: Run linter
         run: npm run lint
-      - name: Run formatter
-        run: npm run format
+        working-directory: ${{ matrix.directory }}
+
+      - name: Run linter with fix
+        if: failure()
+        run: npm run lint:fix
+        working-directory: ${{ matrix.directory }}
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        directory: [api, front]
+    name: Test ${{ matrix.directory }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ${{ matrix.directory }}
+
+      - name: Run tests
+        run: npm test
+        working-directory: ${{ matrix.directory }}
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        directory: [api, front]
+    name: Build ${{ matrix.directory }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ${{ matrix.directory }}
+
+      - name: Build project
+        run: npm run build
+        working-directory: ${{ matrix.directory }}
