@@ -45,4 +45,30 @@ realRouter.get('/randomstudent', async (req: Request, res: Response) => {
   }
 });
 
+// route pour récupérer les statistiques
+realRouter.get('/students/stats', async (req: Request, res: Response) => {
+  try {
+    const url = 'https://harry-potter-api-3a23c827ee69.herokuapp.com/api/characters';
+    const response = await axios.get(url);
+    const students = response.data;
+
+    const houseCount = students.reduce((acc: any, student: any) => {
+      const house = student.house || 'Unknown';
+      acc[house] = (acc[house] || 0) + 1;
+      return acc;
+    }, {});
+
+    const ageDistribution = students.reduce((acc: any, student: any) => {
+      const age = student.yearOfBirth ? new Date().getFullYear() - student.yearOfBirth : 'Unknown';
+      acc[age] = (acc[age] || 0) + 1;
+      return acc;
+    }, {});
+
+    res.json({ houseCount, ageDistribution });
+  } catch (error) {
+    res.status(500).send('Erreur lors de la récupération des statistiques');
+  }
+});
+
+
 export default realRouter;
