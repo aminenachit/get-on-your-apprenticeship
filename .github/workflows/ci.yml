@@ -1,56 +1,42 @@
 name: CI
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  lint-and-format:
+  lint-and-format-front:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        folder: [api, front]
-
+    defaults:
+      run:
+        working-directory: front
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
-
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
-
+          node-version: '16'
       - name: Install dependencies
-        run: |
-          cd ${{ matrix.folder }}
-          npm install
-
-      - name: List files for debugging
-        run: |
-          cd ${{ matrix.folder }}
-          ls -la
-
-      - name: Verify ESLint installation
-        run: |
-          cd ${{ matrix.folder }}
-          npx eslint -v
-
-      - name: Verify ESLint config
-        run: |
-          cd ${{ matrix.folder }}
-          npx eslint --print-config src/index.ts
-
+        run: npm install
       - name: Run linter
-        run: |
-          cd ${{ matrix.folder }}
-          npm run lint
-
+        run: npm run lint
       - name: Run formatter
-        run: |
-          cd ${{ matrix.folder }}
-          npm run format
+        run: npm run format
+
+  lint-and-format-api:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Run linter
+        run: npm run lint
+      - name: Run formatter
+        run: npm run format

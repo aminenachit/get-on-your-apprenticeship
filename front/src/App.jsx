@@ -25,10 +25,12 @@ function App() {
     }
     const response = await fetch(url);
     const data = await response.json();
-    setStudents(data.students.map(student => ({
-      ...student,
-      houseLogo: getHouseLogo(student.house),
-    })));
+    setStudents(
+      data.students.map((student) => ({
+        ...student,
+        houseLogo: getHouseLogo(student.house),
+      })),
+    );
     setTotalPages(data.totalPages);
     animateCards();
   };
@@ -43,7 +45,6 @@ function App() {
     window.scrollTo(0, 500);
   };
 
-
   // Fonction pour obtenir le logo de la maison du student
   const getHouseLogo = (house) => {
     switch (house) {
@@ -51,15 +52,14 @@ function App() {
         return gryffindorLogo;
       case 'Ravenclaw':
         return ravenclawLogo;
-        case 'Slytherin':
+      case 'Slytherin':
         return slytherinLogo;
-        case 'Hufflepuff':
+      case 'Hufflepuff':
         return hufflepuffLogo;
       default:
-        return nop; 
+        return nop;
     }
   };
-
 
   const animateCards = () => {
     const cards = document.querySelectorAll('.student-card');
@@ -79,7 +79,7 @@ function App() {
     const data = await response.json();
     setRandomStudent({
       ...data,
-     
+
       houseLogo: getHouseLogo(data.house),
     });
   };
@@ -87,38 +87,66 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo"  />
-        <div><button onClick={fetchRandomStudent}> Tirer un élève au sort</button>
-        {randomStudent && (
-          <div className={`random-student-card ${randomStudent && 'winner'}`}>
-            {/*<img src={student.photoUrl} alt={`Photo de ${student.name}`} className="student-photo" /> */}
-            <img src={randomStudent.image ? randomStudent.image : nop} alt={`Photo de ${randomStudent.name}`} className="student-photo" />
-            <img src={randomStudent.houseLogo} alt={`Logo de la maison ${randomStudent.house}`} className="house-logo" />
-            <h3>Nom : {randomStudent.name}</h3>
-            <h4>Naissance : {randomStudent.dateOfBirth}</h4>
-            <h4>Surnom : {randomStudent.alternate_names}</h4>
-          </div>
-        )}</div>
+        <img src={logo} className="App-logo" alt="logo" />
+        <div>
+          <button onClick={fetchRandomStudent}> Tirer un élève au sort</button>
+          {randomStudent && (
+            <div className={`random-student-card ${randomStudent && 'winner'}`}>
+              {/*<img src={student.photoUrl} alt={`Photo de ${student.name}`} className="student-photo" /> */}
+              <img
+                src={randomStudent.image ? randomStudent.image : nop}
+                alt={`Photo de ${randomStudent.name}`}
+                className="student-photo"
+              />
+              <img
+                src={randomStudent.houseLogo}
+                alt={`Logo de la maison ${randomStudent.house}`}
+                className="house-logo"
+              />
+              <h3>Nom : {randomStudent.name}</h3>
+              <h4>Naissance : {randomStudent.dateOfBirth}</h4>
+              <h4>Surnom : {randomStudent.alternate_names}</h4>
+            </div>
+          )}
+        </div>
         <h2>Voici la liste de tous les élèves :</h2>
-        <div className='center'>
+        <div className="center">
           <button onClick={() => setSelectedHouse('all')}>Tous</button>
-          <button onClick={() => setSelectedHouse('Gryffindor')}>Gryffindor</button>
-          <button onClick={() => setSelectedHouse('Ravenclaw')}>Ravenclaw</button>
-          <button onClick={() => setSelectedHouse('Slytherin')}>Slytherin</button>
-          <button onClick={() => setSelectedHouse('Hufflepuff')}>Hufflepuff</button>
+          <button onClick={() => setSelectedHouse('Gryffindor')}>
+            Gryffindor
+          </button>
+          <button onClick={() => setSelectedHouse('Ravenclaw')}>
+            Ravenclaw
+          </button>
+          <button onClick={() => setSelectedHouse('Slytherin')}>
+            Slytherin
+          </button>
+          <button onClick={() => setSelectedHouse('Hufflepuff')}>
+            Hufflepuff
+          </button>
         </div>
         <div className="student-list">
-          {students ? students.map(student => (
-            <div key={crypto.randomUUID()} className="student-card">
-              {/*<img src={student.photoUrl} alt={`Photo de ${student.name}`} className="student-photo" /> */}
-              <img src={student.image ? student.image : nop} alt={`Photo de ${student.name}`} className="student-photo" />
-              <img src={student.houseLogo} alt={`Logo de la maison ${student.house}`} className="house-logo" />
-              <h3>Name : {student.name}</h3>
-              <h4>Birth : {student.dateOfBirth}</h4>
-              <h4>surname : {student.alternate_names}</h4>
-            </div>
-          )) : "Chargement..."}
-          <div className='center'>
+          {students
+            ? students.map((student) => (
+                <div key={crypto.randomUUID()} className="student-card">
+                  {/*<img src={student.photoUrl} alt={`Photo de ${student.name}`} className="student-photo" /> */}
+                  <img
+                    src={student.image ? student.image : nop}
+                    alt={`Photo de ${student.name}`}
+                    className="student-photo"
+                  />
+                  <img
+                    src={student.houseLogo}
+                    alt={`Logo de la maison ${student.house}`}
+                    className="house-logo"
+                  />
+                  <h3>Name : {student.name}</h3>
+                  <h4>Birth : {student.dateOfBirth}</h4>
+                  <h4>surname : {student.alternate_names}</h4>
+                </div>
+              ))
+            : 'Chargement...'}
+          <div className="center">
             <button onClick={handlePrevPage}>Previous</button>
             <button onClick={handleNextPage}>Next</button>
           </div>
