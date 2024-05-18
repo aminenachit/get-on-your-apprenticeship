@@ -11,10 +11,10 @@ realRouter.get('/students', async (req: Request, res: Response) => {
     const url =
       'https://harry-potter-api-3a23c827ee69.herokuapp.com/api/characters';
     const response = await axios.get(url);
-    let students = response.data;
+    let students: Student[] = response.data;
 
     if (house) {
-      students = students.filter((student: any) => student.house === house);
+      students = students.filter((student: Student) => student.house === house);
     }
 
     // Pagination
@@ -30,6 +30,18 @@ realRouter.get('/students', async (req: Request, res: Response) => {
   }
 });
 
+interface Student {
+  name: string;
+  house: string;
+  yearOfBirth: number;
+}
+interface HouseCount {
+  [key: string]: number;
+}
+
+interface AgeDistribution {
+  [key: string]: number;
+}
 // route pour récupérer un élève au hasard
 realRouter.get('/randomstudent', async (req: Request, res: Response) => {
   try {
@@ -45,30 +57,35 @@ realRouter.get('/randomstudent', async (req: Request, res: Response) => {
   }
 });
 
-// route pour récupérer les statistiques
+// Route pour récupérer les statistiques des élèves
 realRouter.get('/students/stats', async (req: Request, res: Response) => {
   try {
-    const url = 'https://harry-potter-api-3a23c827ee69.herokuapp.com/api/characters';
+    const url =
+      'https://harry-potter-api-3a23c827ee69.herokuapp.com/api/characters';
     const response = await axios.get(url);
-    const students = response.data;
+    const students: Student[] = response.data;
 
-    const houseCount = students.reduce((acc: any, student: any) => {
+    const houseCount = students.reduce((acc: HouseCount, student: Student) => {
       const house = student.house || 'Unknown';
       acc[house] = (acc[house] || 0) + 1;
       return acc;
     }, {});
 
-    const ageDistribution = students.reduce((acc: any, student: any) => {
-      const age = student.yearOfBirth ? new Date().getFullYear() - student.yearOfBirth : 'Unknown';
-      acc[age] = (acc[age] || 0) + 1;
-      return acc;
-    }, {});
+    const ageDistribution = students.reduce(
+      (acc: AgeDistribution, student: Student) => {
+        const age = student.yearOfBirth
+          ? new Date().getFullYear() - student.yearOfBirth
+          : 'Unknown';
+        acc[age] = (acc[age] || 0) + 1;
+        return acc;
+      },
+      {},
+    );
 
     res.json({ houseCount, ageDistribution });
   } catch (error) {
     res.status(500).send('Erreur lors de la récupération des statistiques');
   }
 });
-
 
 export default realRouter;
