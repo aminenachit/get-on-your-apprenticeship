@@ -1,0 +1,74 @@
+html {
+    box-sizing: border-box;
+  }
+  
+  *,
+  *::after,
+  *:before {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+  }
+
+  .form-section {
+    background-image: url('../assets/test3.gif'); 
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  form {
+    padding: 56px;
+    min-width: 320px;
+    box-shadow: 0 0 6px 4px rgba(255, 255, 255, 0.15);
+  }
+  
+  ul {
+    margin-bottom: 32px;
+  }
+  
+  legend {
+    margin-bottom: 24px;
+    font-family: serif;
+    font-size: 48px;
+  }
+  
+  label {
+    font-size: 24px;
+    text-transform: uppercase;
+  }
+  
+  fieldset {
+    padding: 0;
+    border: 0;
+  }
+  
+  li {
+    list-style-type: none;
+    margin-bottom: 24px;
+  }
+  
+  input {
+    display: flex;
+    width: 320px;
+    height: 38px;
+    color: gold;
+    outline: none;
+    padding: 0 16px;
+    font-size: 24px;
+  }
+  
+  
+  button:hover {
+    background-color: #964ef3;
+  }
+  
+  form a {
+    display: inline-flex;
+    margin-top: 32px;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    color: gold;
+    font-size: 16px;
+  }
