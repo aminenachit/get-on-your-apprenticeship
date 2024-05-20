@@ -13,13 +13,10 @@
   font-weight: 400;
   color-scheme: light dark;
   color: var(--gryffindor-gold);
-  background-color: var(--gryffindor-red);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: var(--gryffindor-gold);
-  background-color: var(--gryffindor-red);
 }
 
 .App-logo {
@@ -266,8 +263,8 @@ nav a:hover {
 @media screen and (max-width: 768px) {
 
   .App-logo {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
   }
 
   button {

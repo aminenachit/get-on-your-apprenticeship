@@ -31,7 +31,6 @@ const Home = () => {
       }))
     );
     setTotalPages(data.totalPages);
-    animateCards();
   };
 
   const handlePrevPage = () => {
@@ -59,16 +58,6 @@ const Home = () => {
     }
   };
 
-  const animateCards = () => {
-    const cards = document.querySelectorAll('.student-card');
-    cards.forEach((card, index) => {
-      setTimeout(() => {
-        card.style.opacity = 1;
-        card.style.transform = 'translateY(0)';
-      }, 150 * index);
-    });
-  };
-
   const [randomStudent, setRandomStudent] = useState(null);
 
   const fetchRandomStudent = async () => {
@@ -83,7 +72,7 @@ const Home = () => {
   return (
     <div>
       <div>
-        <button onClick={fetchRandomStudent}>Tirer un élève au sort</button>
+        <button onClick={fetchRandomStudent}>Pick random student</button>
         {randomStudent && (
           <div className={`random-student-card ${randomStudent && 'winner'}`}>
             <img
@@ -102,9 +91,9 @@ const Home = () => {
           </div>
         )}
       </div>
-      <h2>Voici la liste de tous les élèves :</h2>
+      <h2>Here is the list of all the students :</h2>
       <div className="center">
-        <button onClick={() => setSelectedHouse('all')}>Tous</button>
+        <button onClick={() => setSelectedHouse('all')}>All</button>
         <button onClick={() => setSelectedHouse('Gryffindor')}>Gryffindor</button>
         <button onClick={() => setSelectedHouse('Ravenclaw')}>Ravenclaw</button>
         <button onClick={() => setSelectedHouse('Slytherin')}>Slytherin</button>
@@ -129,7 +118,7 @@ const Home = () => {
                 <h4>surname : {student.alternate_names}</h4>
               </div>
             ))
-          : 'Chargement...'}
+          : 'Loading...'}
         <div className="center">
           <button onClick={handlePrevPage}>Previous</button>
           <button onClick={handleNextPage}>Next</button>
