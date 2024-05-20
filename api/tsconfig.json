@@ -2,9 +2,15 @@
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "./",  // Modifier rootDir pour inclure tous les fichiers à la racine et sous-dossiers
     "esModuleInterop": true,
     "moduleResolution": "Node16",
-    "target": "ESNext"
-  }
+    "target": "ESNext",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ]
+  },
+  "include": ["src/**/*", "functions/**/*"],  // Inclure le dossier functions dans le projet
+  "exclude": ["node_modules"]
 }
