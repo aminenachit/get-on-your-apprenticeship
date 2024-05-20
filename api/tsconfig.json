@@ -2,7 +2,6 @@
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "./",  // Modifier rootDir pour inclure tous les fichiers à la racine et sous-dossiers
     "esModuleInterop": true,
     "moduleResolution": "Node16",
     "target": "ESNext",
