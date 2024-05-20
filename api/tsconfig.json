@@ -1,7 +1,8 @@
 {
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "functions/",
+    "rootDir": "src", 
     "esModuleInterop": true,
     "moduleResolution": "Node16",
     "target": "ESNext",
@@ -9,7 +10,5 @@
       "./node_modules/@types",
       "./types"
     ]
-  },
-  "include": ["src/**/*", "functions/**/*"],  // Inclure le dossier functions dans le projet
-  "exclude": ["node_modules"]
+  }
 }
