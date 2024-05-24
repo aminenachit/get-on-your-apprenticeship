@@ -2,6 +2,10 @@
   command = "npm run build && echo 'Build complete'"
   functions = "api/functions"
 
-
 [functions]
   directory = "api/functions"
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
