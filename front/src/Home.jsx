@@ -18,7 +18,7 @@ const Home = () => {
   }, [selectedHouse, currentPage]);
 
   const fetchStudents = async (house, page) => {
-    let url = `https://poudlardapi.netlify.app/index/real/students?page=${page}`;
+    let url = `http://localhost:3000/real/students?page=${page}`;
     if (house !== 'all') {
       url += `&house=${house}`;
     }
@@ -61,7 +61,7 @@ const Home = () => {
   const [randomStudent, setRandomStudent] = useState(null);
 
   const fetchRandomStudent = async () => {
-    const response = await fetch('https://poudlardapi.netlify.app/real/randomstudent');
+    const response = await fetch('http://localhost:3000/real/randomstudent');
     const data = await response.json();
     setRandomStudent({
       ...data,
