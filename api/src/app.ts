@@ -1,5 +1,5 @@
 import createError from 'http-errors';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
@@ -8,7 +8,6 @@ import logger from 'morgan';
 import usersRouter from './routes/users';
 import dummyRouter from './routes/dummy';
 import errorHandler from './error-handler';
-
 import realRouter from './routes/real';
 
 const app = express();
@@ -25,7 +24,7 @@ app.use('/dummy', dummyRouter);
 app.use('/real', realRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req: Request, res: Response, next: NextFunction) => {
   next(createError(404));
 });
 

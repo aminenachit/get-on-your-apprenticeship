@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use('/real', realRouter);
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 // Utilisez votre middleware de gestion des erreurs personnalisé
 app.use(errorHandler);

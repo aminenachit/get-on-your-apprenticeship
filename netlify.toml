@@ -1,6 +1,6 @@
 [build]
   command = "npm run build && echo 'Build complete'"
-  publish = "front/build"
+  publish = "front/dist"
   functions = "api/functions"
 
 
