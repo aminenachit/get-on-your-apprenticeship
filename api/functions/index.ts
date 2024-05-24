@@ -1,12 +1,16 @@
 import express from 'express';
 import serverless from 'serverless-http';
-import cors from 'cors';
+import cors from 'cors'; // Importer le middleware cors
 import realRouter from '../src/routes/real';
 import userRouter from '../src/routes/users';
-import errorHandler from '../src/error-handler'; 
+import errorHandler from '../src/error-handler';
+
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://aminenachit.github.io'] // Autorise les requêtes depuis ces origines
+}));
+
 app.use(express.json());
 app.use('/real', realRouter);
 app.use('/users', userRouter);

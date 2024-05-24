@@ -18,7 +18,7 @@ const Home = () => {
   }, [selectedHouse, currentPage]);
 
   const fetchStudents = async (house, page) => {
-    let url = `https://poudlardapi.netlify.app/real/students?page=${page}`;
+    let url = `https://poudlardapi.netlify.app/index/real/students?page=${page}`;
     if (house !== 'all') {
       url += `&house=${house}`;
     }
