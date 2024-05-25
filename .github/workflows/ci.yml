@@ -72,9 +72,9 @@ jobs:
       web:
         image: node:16
         ports:
-          - 3000:3000
+          - 5173:5173
         options: >-
-          --health-cmd="curl --fail http://localhost:3000 || exit 1"
+          --health-cmd="curl --fail http://localhost:5173/get-on-your-apprenticeship/ || exit 1"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -93,7 +93,7 @@ jobs:
         working-directory: ./front
 
       - name: Start frontend server
-        run: npm start
+        run: npm run dev
         working-directory: ./front
         env:
           CI: true
