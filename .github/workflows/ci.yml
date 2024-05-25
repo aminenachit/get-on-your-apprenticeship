@@ -64,3 +64,40 @@ jobs:
       - name: Build api
         run: npm run build
         working-directory: ./api
+
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      web:
+        image: node:16
+        ports:
+          - 3000:3000
+        options: >-
+          --health-cmd="curl --fail http://localhost:3000 || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies for front
+        run: npm install
+        working-directory: ./front
+
+      - name: Start frontend server
+        run: npm start
+        working-directory: ./front
+        env:
+          CI: true
+
+      - name: Run Playwright tests
+        run: npm run test:e2e
+        working-directory: ./front
